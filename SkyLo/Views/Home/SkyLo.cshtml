@@ -1,4 +1,7 @@
-﻿<div class="container">
+﻿@using SkyLo.Models
+@model LoginViewModel
+
+<div class="container">
 
   <div class="starter-template">
     <h1>WELCOME TO SKY&LOTUS BAR</h1>
@@ -22,7 +25,37 @@
         <div class="panel-body">
           <div class="row">
             <div class="col-lg-12">
-              <form id="login-form" action="http://phpoll.com/login/process" method="post" role="form" style="display: block;">
+              @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new {role = "form", @id = "login-form" }))
+              {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <div class="form-group">
+                  @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Username", @tabindex = "1" })
+                  @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group">
+                  @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Password", @tabindex = "2" })
+                  @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group text-center">
+                  @Html.CheckBoxFor(m => m.RememberMe, new {@id = "remember", @tabindex = "3" })
+                  @Html.LabelFor(m => m.RememberMe)
+                </div>
+
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-sm-6 col-sm-offset-3">
+                      <input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-login" value="Log In">
+                    </div>
+                  </div>
+                </div>
+              }
+
+
+              @*<form id="login-form" action="http://phpoll.com/login/process" method="post" role="form" style="display: block;">
                 <div class="form-group">
                   <input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="">
                 </div>
@@ -49,7 +82,8 @@
                     </div>
                   </div>
                 </div>
-              </form>
+              </form>*@
+
               <form id="register-form" action="http://phpoll.com/register/process" method="post" role="form" style="display: none;">
                 <div class="form-group">
                   <input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="">
