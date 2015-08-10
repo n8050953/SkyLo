@@ -1,0 +1,52 @@
+﻿@using SkyLo.Models
+@model StockModel
+
+@{
+  ViewBag.Title = "Stock Up";
+  Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="starter-template">
+  <h1>Stock Up</h1>
+  <p class="lead">Add new stock</p>
+</div>
+
+<div class="container-fluid">
+  <div class="col-md-4 col-md-offset-4 well well-lg">
+    <form class="form-horizontal">
+      <!--Name-->
+      <div class="form-group">
+        <label for="StockNm" class="col-md-4 control-label">@Html.LabelFor(m => m.StockName)</label>
+        <div class="col-md-6">
+          <input type="text" class="form-control" id="StockNm" placeholder="Enter stock name">
+        </div>
+      </div>
+      <!--Type-->
+      <div class="form-group">
+        <label for="StockTypCd" class="col-md-4 control-label">@Html.LabelFor(m => m.StockType)</label>
+        <div class="col-md-6">
+          <input type="text" class="form-control" id="exampleInputName2" placeholder="Jane Doe">
+        </div>
+        
+      </div>
+      <!--Level-->
+      <div class="form-group">
+        <label for="StockLvl" class="col-md-4 control-label">@Html.LabelFor(m => m.StockLvl)</label>
+        <div class="col-md-6">
+          <input type="text" class="form-control" id="StockLvl" placeholder="Enter stock level">
+        </div>
+      </div>
+      <!---->
+      <div class="form-group">
+        <div class="col-md-6 col-md-offset-4">
+          <button type="submit" class="btn btn-default">Submit</button>
+          <button type="submit" class="btn btn-default pull-right">Add another</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<style>
+
+</style>
