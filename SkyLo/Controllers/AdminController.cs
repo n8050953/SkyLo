@@ -21,5 +21,11 @@ namespace SkyLo.Controllers
 
       return View(model);
     }
+
+    [HttpGet]
+    public ViewResult AddRole()
+    {
+      return View();
+    }
   }
 }
