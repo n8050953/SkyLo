@@ -15,7 +15,7 @@ namespace SkyLo.Controllers
 
     public ActionResult About()
     {
-      ViewBag.Message = "Your application description page.";
+      ViewBag.Message = "This page was made by Minh-Tam Nguyen-Nhat.";
 
       return View();
     }
