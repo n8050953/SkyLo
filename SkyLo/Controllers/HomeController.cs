@@ -10,7 +10,9 @@ namespace SkyLo.Controllers
   {
     public ActionResult Index()
     {
-      return View();
+        ViewBag.Title = "SkyLo.";
+
+        return View();
     }
 
     public ActionResult About()
@@ -23,13 +25,6 @@ namespace SkyLo.Controllers
     public ActionResult Contact()
     {
       ViewBag.Message = "Your contact page.";
-
-      return View();
-    }
-
-    public ActionResult SkyLo()
-    {
-      ViewBag.Title = "SkyLo.";
 
       return View();
     }

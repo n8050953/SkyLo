@@ -56,5 +56,11 @@ namespace SkyLo.Controllers
 
             return View();
         }
+
+        [HttpGet]
+        public ViewResult AddUserToRole()
+        {
+            return View();
+        }
     }
 }
