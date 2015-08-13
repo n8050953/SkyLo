@@ -178,8 +178,13 @@
     <Compile Include="Migrations\201508110107372_InitialMigration.Designer.cs">
       <DependentUpon>201508110107372_InitialMigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201508130401150_AddRoleDescription.cs" />
+    <Compile Include="Migrations\201508130401150_AddRoleDescription.Designer.cs">
+      <DependentUpon>201508130401150_AddRoleDescription.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AdminModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\StockModel.cs" />
@@ -194,7 +199,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\SkyLo.css" />
+    <Content Include="Content\SkyLo\SkyLo.css" />
     <Content Include="Content\starter-template.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -273,6 +278,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201508110107372_InitialMigration.resx">
       <DependentUpon>201508110107372_InitialMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508130401150_AddRoleDescription.resx">
+      <DependentUpon>201508130401150_AddRoleDescription.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

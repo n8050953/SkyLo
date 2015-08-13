@@ -1,30 +1,57 @@
-﻿
+﻿@model SkyLo.Models.RoleViewModel
+
 @{
     ViewBag.Title = "Add Role";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div class="starter-template">
-  <h1>Add New Role</h1>
-  <p class="lead">Just adding new role to the app.</p>
+    <h1>Add New Role</h1>
+    <p class="lead">Just adding new role to the app.</p>
 </div>
 
 <div class="container-fluid">
-  <div class="col-md-6 col-md-offset-3 well well-lg">
-    <form class="form-horizontal">
-      <!--Name-->
-      <div class="form-group">
-        <label for="RoleNm" class="col-md-4 control-label">Role Name</label>
-        <div class="col-md-6">
-          <input type="text" class="form-control" id="RoleNm" placeholder="Enter role name">
-        </div>
-      </div>
-      <!---->
-      <div class="form-group">
-        <div class="col-md-6 col-md-offset-4">
-          <button type="submit" class="btn btn-default">Add role</button>
-        </div>
-      </div>
-    </form>
-  </div>
+    <div class="col-md-6 col-md-offset-3 well well-lg">
+        @using (Html.BeginForm("AddRole", "Admin", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form", @class = "form-horizontal" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <!--Name-->
+            <div class="form-group">
+                @Html.LabelFor(m => m.RoleName, new { @class = "col-md-4 control-label", @for = "RoleNm" })
+                <div class="col-md-6">
+                    @Html.TextBoxFor(m => m.RoleName, new { @class = "form-control", @placeholder = "Enter role name", @id = "RoleNm" })
+                    @Html.ValidationMessageFor(m => m.RoleName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <!--Description-->
+            <div class="form-group">
+                @Html.LabelFor(m => m.RoleDescription, new { @class = "col-md-4 control-label", @for = "RoleDesc" })
+                <div class="col-md-6">
+                    @Html.TextBoxFor(m => m.RoleDescription, new { @class = "form-control", @placeholder = "Enter role description", @id = "RoleDesc" })
+                    @Html.ValidationMessageFor(m => m.RoleDescription, "", new { @class = "text-danger" })
+                </div>
+            </div>
+             <!---->
+            <div class="form-group">
+                <div class="col-md-6 col-md-offset-4">
+                    <button type="submit" class="btn btn-default">Add role</button>
+                    <button type="reset" class="btn btn-default" id="resetBtn">Reset</button>
+                </div>
+            </div>
+        }
+    </div>
 </div>
+
+@section scripts
+{
+    <script>
+        $(function () { 
+            $('#resetBtn').click(function () { 
+                $(".field-validation-error").empty();
+                $(".validation-summary-errors").empty();
+            });
+        });
+    </script>
+}
