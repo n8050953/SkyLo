@@ -11,6 +11,7 @@ namespace SkyLo.Controllers
 {
     public class AdminController : Controller
     {
+        [Authorize(Roles = "SuperAdmin, Admin")]
         public ActionResult Index()
         {
             return View();
@@ -25,6 +26,7 @@ namespace SkyLo.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "SuperAdmin, Admin")]
         public ViewResult AddRole()
         {
             var model = new RoleViewModel();
@@ -32,6 +34,7 @@ namespace SkyLo.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "SuperAdmin, Admin")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> AddRole(RoleViewModel model)
         {
@@ -58,6 +61,7 @@ namespace SkyLo.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles="SuperAdmin, Admin")]
         public ViewResult AddUserToRole()
         {
             var model = new UserRoleViewModel();
@@ -68,6 +72,7 @@ namespace SkyLo.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "SuperAdmin, Admin")]
         [ValidateAntiForgeryToken]
         public async Task<ViewResult> AddUserToRole(UserRoleViewModel model)
         {
@@ -89,7 +94,7 @@ namespace SkyLo.Controllers
         private void PopulateAddNewRoleDropdown()
         {
             var userManger = HttpContext.GetOwinContext().Get<ApplicationUserManager>();
-            ViewBag.UserList = userManger.Users.ToList();
+            ViewBag.UserList = userManger.Users.ToList().Where(m => m.Roles.Count() == 0); // 1 role per user
 
             var roleManager = HttpContext.GetOwinContext().Get<ApplicationRoleManager>();
             ViewBag.RoleList = roleManager.Roles.ToList();
