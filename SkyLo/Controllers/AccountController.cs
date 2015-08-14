@@ -58,7 +58,7 @@ namespace SkyLo.Controllers
         public ActionResult Login(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
-            return View();
+            return View("_Login");
         }
 
         //
@@ -70,7 +70,7 @@ namespace SkyLo.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View(model);
+                return View("_Login",model);
             }
 
             // This doesn't count login failures towards account lockout
@@ -87,7 +87,7 @@ namespace SkyLo.Controllers
                 case SignInStatus.Failure:
                 default:
                     ModelState.AddModelError("", "Invalid login attempt.");
-                    return View(model);
+                    return View("_Login",model);
             }
         }
 
@@ -139,7 +139,7 @@ namespace SkyLo.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            return View();
+            return View("_Register");
         }
 
         //
@@ -169,7 +169,7 @@ namespace SkyLo.Controllers
             }
 
             // If we got this far, something failed, redisplay form
-            return View(model);
+            return View("_Register",model);
         }
 
         //
@@ -449,7 +449,7 @@ namespace SkyLo.Controllers
             {
                 return Redirect(returnUrl);
             }
-            return RedirectToAction("Index", "Admin");
+            return RedirectToAction("Index", "Home");
         }
 
         internal class ChallengeResult : HttpUnauthorizedResult

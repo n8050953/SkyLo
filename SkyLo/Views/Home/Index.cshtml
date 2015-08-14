@@ -2,41 +2,78 @@
 
 <div class="container">
 
-  <div class="starter-template">
-    <h1>WELCOME TO SKY&LOTUS BAR</h1>
-    <p class="lead">Stock Managerment System.</p>
-  </div>
-
-  <div class="row">
-    <div class="col-md-6 col-md-offset-3">
-      <div class="panel panel-login">
-        <div class="panel-heading">
-          <div class="row">
-            <div class="col-xs-6">
-              <a href="#" class="active" id="login-form-link">Login</a>
-            </div>
-            <div class="col-xs-6">
-              <a href="#" id="register-form-link">Register</a>
-            </div>
-          </div>
-          <hr>
-        </div>
-        <div class="panel-body">
-          <div class="row">
-            <div class="col-lg-12">
-              <!--Login goes here -->
-              @Html.Partial("_Login")
-              <!-- Register goes here -->
-              @Html.Partial("_Register")
-            </div>
-          </div>
-        </div>
-      </div>
+    <div class="starter-template">
+        <h1>WELCOME TO SKY&LOTUS BAR</h1>
+        <p class="lead">Stock Managerment System.</p>
     </div>
-  </div>
+
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="panel panel-login">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <a href="#" class="active" id="login-form-link">Login</a>
+                        </div>
+                        <div class="col-xs-6">
+                            <a href="#" id="register-form-link">Register</a>
+                        </div>
+                    </div>
+                    <hr>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <!--Login goes here -->
+                            @Html.Partial("_Login")
+                            <!-- Register goes here -->
+                            @Html.Partial("_Register")
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </div>
 
 @section Scripts {
-  @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        $(function () {
+            $('#register-form').hide();
+
+            //
+            $('#register-form').submit(function (e) {
+                e.preventDefault();
+                $.post(
+                    '@Url.Action("Register","Account")',
+                        $('#register-form').serialize(),
+                        function (data) {
+                            var content = $(data).find('#register-form').html();
+                            $('#register-form').empty();
+                            $('#register-form').html(content);
+                        });
+            });
+            //
+            $('#login-form').submit(function (e) {
+                e.preventDefault();
+                $.post(
+                    '@Url.Action("Login","Account")',
+                    $('#login-form').serialize(),
+                    function (data) {
+                        var hassError = $(data).find("form > .text-danger").hasClass('validation-summary-errors');
+                        if (hassError) {
+                            var content = $(data).find('#login-form').html();
+                            $('#login-form').empty();
+                            $('#login-form').html(content);
+                        } else {
+                            @*window.location.href = '@Url.Action("Index", "Admin", null, Request.Url.Scheme)'*@
+                            location.reload(true);
+                        }
+                    });
+            });
+        });
+    </script>
 }
