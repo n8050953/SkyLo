@@ -1,4 +1,6 @@
-﻿@{
+﻿@model SkyLo.Models.UserRoleViewModel
+
+@{
     ViewBag.Title = "Add User To Role";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -12,44 +14,39 @@
     <div class="col-md-6 col-md-offset-3 well well-lg">
         @using (Html.BeginForm("AddUserToRole", "Admin", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form", @class = "form-horizontal" }))
         {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
             <!--Username-->
             <div class="form-group">
-                <label for="userNm" class="col-md-4 control-label">Username</label>
+                @*<label for="userNm" class="col-md-4 control-label">Username</label>*@
+                @Html.LabelFor(m => m.SelectUser, new { @class = "col-md-4 control-label" })
                 <div class="col-md-6">
-                    @*<input type="text" class="form-control" id="userNm" placeholder="Select username">*@
-                    <div class="dropdown">
-                        <button class="btn btn-default dropdown-toggle" type="button" id="usernameDdBtn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                            Select username
-                            <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="usernameDdBtn">
-                            <li><a href="#">Action</a></li>
-                            <li><a href="#">Another action</a></li>
-                            <li><a href="#">Something else here</a></li>
-                            <li><a href="#">Separated link</a></li>
-                        </ul>
-                    </div>
+                    @Html.DropDownListFor(m => m.SelectUser, new SelectList(ViewBag.UserList, "Id", "Username"), "-/- Select a username -/-", new { @class = "selectpicker" })
+                    @Html.ValidationMessageFor(m => m.SelectUser, "", new { @class = "text-danger" })
                 </div>
             </div>
             <!--Role-->
             <div class="form-group">
-                <label for="userRole" class="col-md-4 control-label">User role</label>
+                @*<label for="userRole" class="col-md-4 control-label">User role</label>*@
+                @Html.LabelFor(m => m.SelectRole, new { @class = "col-md-4 control-label" })
                 <div class="col-md-6">
-                    @*<input type="text" class="form-control" id="userRole" placeholder="Select role for username">*@
-                    <div class="dropdown">
-                        <button class="btn btn-default dropdown-toggle" type="button" id="userroleDpBtn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                            Select role for username
-                            <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="userroleDpBtn">
-                            <li><a href="#">Action</a></li>
-                            <li><a href="#">Another action</a></li>
-                            <li><a href="#">Something else here</a></li>
-                            <li><a href="#">Separated link</a></li>
-                        </ul>
-                    </div>
+                    @Html.DropDownListFor(m => m.SelectRole, new SelectList(ViewBag.RoleList, "Name", "Name"), "-/- Select a role -/-", new { @class = "selectpicker" })
+                    @Html.ValidationMessageFor(m => m.SelectRole, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <!---->
+            <div class="form-group">
+                <div class="col-md-6 col-md-offset-4">
+                    <button type="submit" class="btn btn-default">Add</button>
+                    <button type="reset" class="btn btn-default" id="resetBtn">Reset</button>
                 </div>
             </div>
         }
     </div>
 </div>
+
+@section scripts
+{
+   
+}

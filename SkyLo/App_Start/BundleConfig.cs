@@ -22,11 +22,13 @@ namespace SkyLo
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js",
+                      "~/Scripts/BootstrapSelect/bootstrap-select.js",
                       "~/Scripts/SkyLo.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/starter-template.css",
+                      "~/Content/BootstrapSelect/bootstrap-select.css",
                       "~/Content/SkyLo/SkyLo.css"));
         }
     }

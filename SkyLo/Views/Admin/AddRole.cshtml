@@ -46,9 +46,11 @@
 
 @section scripts
 {
+    @Scripts.Render("~/bundles/jqueryval")
+
     <script>
-        $(function () { 
-            $('#resetBtn').click(function () { 
+        $(function () {
+            $('#resetBtn').click(function () {
                 $(".field-validation-error").empty();
                 $(".validation-summary-errors").empty();
             });

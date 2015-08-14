@@ -52,7 +52,7 @@ namespace SkyLo.Controllers
 
                 return RedirectToAction("AddRole");
             }
-           
+
 
             return View();
         }
@@ -60,7 +60,39 @@ namespace SkyLo.Controllers
         [HttpGet]
         public ViewResult AddUserToRole()
         {
-            return View();
+            var model = new UserRoleViewModel();
+
+            PopulateAddNewRoleDropdown();
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ViewResult> AddUserToRole(UserRoleViewModel model)
+        {
+            PopulateAddNewRoleDropdown();
+
+            if (ModelState.IsValid)
+            {
+                var userManger = HttpContext.GetOwinContext().Get<ApplicationUserManager>();
+                var result = await userManger.AddToRoleAsync(model.SelectUser, model.SelectRole);
+                if (result.Succeeded)
+                {
+                    
+                }
+            }
+            
+            return View(model);
+        }
+
+        private void PopulateAddNewRoleDropdown()
+        {
+            var userManger = HttpContext.GetOwinContext().Get<ApplicationUserManager>();
+            ViewBag.UserList = userManger.Users.ToList();
+
+            var roleManager = HttpContext.GetOwinContext().Get<ApplicationRoleManager>();
+            ViewBag.RoleList = roleManager.Roles.ToList();
         }
     }
 }
